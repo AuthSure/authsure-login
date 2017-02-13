@@ -1,0 +1,10 @@
+npm-debug.log
+.DS_Store
+target
+*.iml
+.idea
+bower_components
+build
+node_modules
+node
+dist
