@@ -26,8 +26,25 @@ interface ISignUpTabState {
     passwordState: IInputFieldState
 }
 interface IForgotPasswordTabProps {
+    data: any
 }
 interface IForgotPasswordTabState {
+    hasError: boolean
+    helpMsg: string
+    username: string
+    usernameState: IInputFieldState
+    code: string
+    codeState: IInputFieldState
+    password: string
+    passwordState: IInputFieldState
+    confirmPassword: string
+    confirmPasswordState: IInputFieldState
+    formState: IForgotPasswordState
+}
+interface IForgotPasswordState {
+    forgotPassword: string
+    verifyCode: string
+    resetSuccess: string
 }
 interface IProviderLoginsProps {
     providers: any
