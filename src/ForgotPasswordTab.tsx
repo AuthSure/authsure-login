@@ -7,6 +7,8 @@ import FormError from "./FormError";
 
 export default class ForgotPasswordTab extends React.Component<IForgotPasswordTabProps, IForgotPasswordTabState> {
 
+    public state: IForgotPasswordTabState;
+
     constructor(props: IForgotPasswordTabProps) {
         super(props);
         this.state = {
@@ -107,7 +109,9 @@ export default class ForgotPasswordTab extends React.Component<IForgotPasswordTa
                                                 <span className="glyphicon glyphicon-thumbs-up" aria-hidden="true">
                                                 </span>
                                         <span className="as-success">Password updated successfully. Please
-                                                    <a data-toggle="tab" onClick={(event: any) => this.handleLoginRedirect(event)} href="#as-tab-sign-in">click here</a> to login.
+                                                    <a data-toggle="tab"
+                                                       onClick={(event: any) => this.handleLoginRedirect(event)}
+                                                       href="#as-tab-sign-in"> click here</a> to login.
                                         </span>
                                     </div>
                                 </div>
@@ -156,35 +160,28 @@ export default class ForgotPasswordTab extends React.Component<IForgotPasswordTa
         if(this.validateForgotPasswordForm()) {
 
             let formData = {
-                username: self.state.username
+                username: this.state.username
             };
 
             var self = this;
 
             $.ajax({
-                url: self.props.data.loginUrl + (this.props.data.loginUrl.endsWith('/') ? '' : '/') + "forgot_password",
+                url: this.props.data.loginUrl + (this.props.data.loginUrl.endsWith('/') ? '' : '/') + "forgot_password",
                 method: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(formData)
             }).done(function (res) {
-                this.state.formState.forgotPassword = 'hidden';
-                this.state.formState.verifyCode = '';
-                this.state.formState.resetSuccess = 'hidden';
-                this.setState(this.state);
+                self.state.formState.forgotPassword = 'hidden';
+                self.state.formState.verifyCode = '';
+                self.state.formState.resetSuccess = 'hidden';
+                self.setState(self.state);
             }).fail(function (res) {
                 if (res.status == 400) {
-                    $.each(res.responseJSON, function (index, value) {
-                        if (value.field == null) {
-                            self.showFormError(value.message);
-                        } else {
-                            if(value.field.toLowerCase() === 'password') {
-                                self.state.usernameState.hasError = true;
-                                self.state.usernameState.helpMsg = value.message;
-                            }
-                            self.state.hasError = true;
-                            self.setState(self.state);
-                        }
-                    });
+                    self.state.usernameState.hasError = true;
+                    self.state.usernameState.helpMsg = "Username or email does not exists";
+                    self.state.hasError = true;
+                    self.setState(self.state);
+
                 } else {
                     self.showFormError('Our apologies. An error has occurred.');
                 }
@@ -205,11 +202,12 @@ export default class ForgotPasswordTab extends React.Component<IForgotPasswordTa
         this.state.confirmPasswordState.helpMsg = '';
 
         if(this.validateResetCodeForm()) {
-            var self = this;
             var formData = {
                 code: this.state.code,
                 password: this.state.password
             };
+
+            var self = this;
 
             $.ajax({
                 url: this.props.data.loginUrl + (this.props.data.loginUrl.endsWith('/') ? '' : '/') + "reset_password",
@@ -217,28 +215,16 @@ export default class ForgotPasswordTab extends React.Component<IForgotPasswordTa
                 contentType: "application/json",
                 data: JSON.stringify(formData)
             }).done(function (res) {
-                this.state.formState.forgotPassword = 'hidden';
-                this.state.formState.verifyCode = 'hidden';
-                this.state.formState.resetSuccess = '';
-                this.setState(this.state);
+                self.state.formState.forgotPassword = 'hidden';
+                self.state.formState.verifyCode = 'hidden';
+                self.state.formState.resetSuccess = '';
+                self.setState(self.state);
             }).fail(function (res) {
                 if (res.status == 400) {
-                    $.each(res.responseJSON, function (index, value) {
-                        if (value.field == null) {
-                            self.showFormError(value.message);
-                        } else {
-                            if(value.field.toLowerCase() === 'code') {
-                                self.state.codeState.hasError = true;
-                                self.state.codeState.helpMsg = value.message;
-                            }
-                            if(value.field.toLowerCase() === 'password') {
-                                self.state.passwordState.hasError = true;
-                                self.state.passwordState.helpMsg = value.message;
-                            }
-                            self.state.hasError = true;
-                            self.setState(self.state);
-                        }
-                    });
+                    self.state.codeState.hasError = true;
+                    self.state.codeState.helpMsg = "Reset password code is invalid";
+                    self.state.hasError = true;
+                    self.setState(self.state);
                 } else {
                     self.showFormError('Our apologies. An error has occurred.');
                 }
@@ -308,9 +294,25 @@ export default class ForgotPasswordTab extends React.Component<IForgotPasswordTa
     }
 
     private handleLoginRedirect(event: any) {
+        event.preventDefault();
+        this.state.hasError = false;
+        this.state.helpMsg = '';
+        this.state.username = '';
+        this.state.password = '';
+        this.state.confirmPassword = '';
+        this.state.code = '';
+        this.state.usernameState.hasError = false;
+        this.state.usernameState.helpMsg = '';
+        this.state.codeState.hasError = false;
+        this.state.codeState.helpMsg = '';
+        this.state.passwordState.hasError = false;
+        this.state.passwordState.helpMsg = '';
+        this.state.confirmPasswordState.hasError = false;
+        this.state.confirmPasswordState.helpMsg = '';
         this.state.formState.forgotPassword = '';
         this.state.formState.verifyCode = 'hidden';
         this.state.formState.resetSuccess = 'hidden';
-        this.setState(this.state);
+
+        window.location.reload()
     }
 }
