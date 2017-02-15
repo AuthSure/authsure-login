@@ -29,7 +29,7 @@ export class App extends React.Component<IAppProps, IAppState> {
                                 <div className="tab-content">
                                     <LoginTab data={this.props.data} />
                                     <SignUpTab data={this.props.data} />
-                                    <ForgotPasswordTab/>
+                                    <ForgotPasswordTab data={this.props.data}/>
                                 </div>
                             </div>
                         </div>
