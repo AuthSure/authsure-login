@@ -37,7 +37,6 @@
 }
 
 .as-btn-rest {
-	/*background: #343d39;*/
 	background: #687483;
 	color: white;
 }
@@ -83,13 +82,11 @@
 }
 
 .as-btn-github {
-	/*background: #6cc644;*/
 	background: #444;
 	color: white;
 }
 .as-btn-github:hover, .as-btn-github:active, .as-btn-github:focus{
-	/*background: #55a532;*/
-	background: black;
+	background: #1D1D1D;
 	color: white;
 }
 .as-btn-github .fa-github {
