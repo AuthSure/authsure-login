@@ -33,7 +33,7 @@ export default class ProviderLogin extends React.Component<IProviderLoginProps, 
     public render() {
         let provider = this.props.provider;
         let btnCls = "btn btn-block as-btn-provider " + this.getButtonClass();
-        let faCls = "fa " + this.getFontAwesomeClass();
+        let faCls = "as-btn-provider-fa fa " + this.getFontAwesomeClass();
         let text = (this.props.signIn ? "Sign in with " : "Sign up with ") + provider.name;
         return (
             <button type="button" className={btnCls} role="button" onClick={(event) => this.handleClick(event)}>

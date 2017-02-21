@@ -85,5 +85,15 @@ interface IFormErrorProps {
     msg: string
 }
 interface IFormErrorState {
-
+}
+interface IRestLoginProps {
+    data: any
+}
+interface IRestLoginSstate {
+    hasError: boolean
+    helpMsg: string
+    username: string
+    usernameState: IInputFieldState
+    password: string
+    passwordState: IInputFieldState
 }
