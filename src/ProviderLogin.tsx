@@ -10,17 +10,29 @@ export default class ProviderLogin extends React.Component<IProviderLoginProps, 
 
     private getFontAwesomeClass(): string {
         let name = this.props.provider.name.replace(" ", "-").toLowerCase();
+        let type = this.props.provider.type.toLowerCase();
         if (name === 'salesforce') {
             name = "cloud";
         } else if (name === 'azure-ad') {
             name = "windows";
+        } else if (type === 'rest') {
+            name = "user"
         }
         return 'fa-' + name;
+    }
+
+    private getButtonClass(): string {
+        let type = this.props.provider.type.toLowerCase();
+        if (type === 'rest') {
+            return 'as-btn-rest'
+        }
+        let name = this.props.provider.name.replace(" ", "-").toLowerCase();
+        return 'as-btn-' + name;
     }
     
     public render() {
         let provider = this.props.provider;
-        let btnCls = "btn btn-block as-btn-provider as-btn-" + provider.name.replace(" ", "-").toLowerCase();
+        let btnCls = "btn btn-block as-btn-provider " + this.getButtonClass();
         let faCls = "fa " + this.getFontAwesomeClass();
         let text = (this.props.signIn ? "Sign in with " : "Sign up with ") + provider.name;
         return (
