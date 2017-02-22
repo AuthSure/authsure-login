@@ -1,13 +1,10 @@
-/// <reference path="./interfaces.d.ts"/>
+import * as React from 'react';
+import { IndexLink } from 'react-router';
+import InputField from "../../InputField";
+import FormError from "../../FormError";
+import ProviderLogins from "../../ProviderLogins";
 
-import * as React from "react";
-import ProviderLogins from "./ProviderLogins";
-import InputField from "./InputField";
-import has = Reflect.has;
-import FormError from "./FormError";
-
-export default class SignUpTab extends React.Component<ISignUpTabProps, ISignUpTabState> {
-
+export default class SignupPage extends React.Component<ISignupPageProps, ISignUpTabState> {
     public state: ISignUpTabState;
 
     constructor(props: ISignUpTabProps) {
@@ -45,43 +42,43 @@ export default class SignUpTab extends React.Component<ISignUpTabProps, ISignUpT
 
     public render() {
         return (
-            <div id="as-tab-sign-up" className="tab-pane fade">
-                <div className="row">
-                    <div className="col-xs-12">
-                        {this.state.hasError && this.state.helpMsg !== '' ? <FormError msg={this.state.helpMsg}/> : ''}
-                        <form role="form" method="post" className="as-sign-up-form"
-                              onSubmit={(event) => this.handleSubmit(event)}>
-                            <InputField type="text" faIcon="user" placeholder="First name"
-                                        state={this.state.givenNameState}
-                                        onChange={(event: any) => this.handleGivenNameChange(event)}/>
-                            <InputField type="text" faIcon="user" placeholder="Last name"
-                                        state={this.state.familyNameState}
-                                        onChange={(event: any) => this.handleFamilyNameChange(event)}/>
-                            <InputField type="text" faIcon="envelope" placeholder="Email address"
-                                        state={this.state.emailAddressState}
-                                        onChange={(event: any) => this.handleEmailAddressChange(event)}/>
-                            <InputField type="text" faIcon="user" placeholder="Username"
-                                        state={this.state.usernameState}
-                                        onChange={(event: any) => this.handleUsernameChange(event)}/>
-                            <InputField type="password" faIcon="password" placeholder="Password"
-                                        state={this.state.passwordState}
-                                        onChange={(event: any) => this.handlePasswordChange(event)}/>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-block as-btn-submit">Sign Up</button>
-                            </div>
-                            <div className="form-group">
-                                <div className="row">
-                                    <div className="col-xs-12">
-                                        Already have an account?
-                                        <a data-toggle="tab" href="#as-tab-sign-in">Sign In</a>
+                <div>
+                    <div className="row">
+                        <div className="col-xs-12">
+                            {this.state.hasError && this.state.helpMsg !== '' ? <FormError msg={this.state.helpMsg}/> : ''}
+                            <form role="form" method="post" className="as-sign-up-form"
+                                  onSubmit={(event) => this.handleSubmit(event)}>
+                                <InputField type="text" faIcon="user" placeholder="First name"
+                                            state={this.state.givenNameState}
+                                            onChange={(event: any) => this.handleGivenNameChange(event)}/>
+                                <InputField type="text" faIcon="user" placeholder="Last name"
+                                            state={this.state.familyNameState}
+                                            onChange={(event: any) => this.handleFamilyNameChange(event)}/>
+                                <InputField type="text" faIcon="envelope" placeholder="Email address"
+                                            state={this.state.emailAddressState}
+                                            onChange={(event: any) => this.handleEmailAddressChange(event)}/>
+                                <InputField type="text" faIcon="user" placeholder="Username"
+                                            state={this.state.usernameState}
+                                            onChange={(event: any) => this.handleUsernameChange(event)}/>
+                                <InputField type="password" faIcon="password" placeholder="Password"
+                                            state={this.state.passwordState}
+                                            onChange={(event: any) => this.handlePasswordChange(event)}/>
+                                <div className="form-group">
+                                    <button type="submit" className="btn btn-block as-btn-submit">Sign Up</button>
+                                </div>
+                                <div className="form-group">
+                                    <div className="row">
+                                        <div className="col-xs-12">
+                                            Already have an account?
+                                            <a href=""><IndexLink to="/">Sign In</IndexLink></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                        <ProviderLogins providers={this.props.data.providers} signIn={false}/>
-                    </div> {/* end column */}
-                </div> {/* end row */}
-            </div>
+                            </form>
+                            <ProviderLogins providers={this.props.data.providers} signIn={false}/>
+                        </div> {/* end column */}
+                    </div> {/* end row */}
+                </div>
         );
     }
 

@@ -3,7 +3,7 @@
 import * as $ from "jquery";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { App } from "./App";
+import App from "./components/App";
 
 export class Login {
 

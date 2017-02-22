@@ -3,6 +3,7 @@
 import * as React from "react";
 import InputField from "./InputField";
 import has = Reflect.has;
+import { Link } from 'react-router';
 import FormError from "./FormError";
 
 export default class LocalLogin extends React.Component<ILocalLoginProps, ILocalLoginState> {
@@ -44,9 +45,9 @@ export default class LocalLogin extends React.Component<ILocalLoginProps, ILocal
                     <div className="form-group">
                         <div className="row">
                             <div className="col-xs-12">
-                                <a data-toggle="tab" href="#as-tab-sign-up">Sign Up</a>
+                                <a href=""><Link to="/signup">Sign Up</Link></a>
                                 <i className="fa fa-circle as-separator"/>
-                                <a data-toggle="tab" href="#as-tab-forgot-password">forgot password?</a>
+                                <a href=""><Link to="/forgot_password">Forgot Password?</Link></a>
                                 <label className="pull-right">
                                     <input type="checkbox" className="as-input-remember"/>
                                     Remember me

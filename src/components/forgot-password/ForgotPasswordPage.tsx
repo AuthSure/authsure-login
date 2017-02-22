@@ -1,12 +1,9 @@
-/// <reference path="./interfaces.d.ts"/>
+import * as React from 'react';
+import { Link, IndexLink } from 'react-router';
+import InputField from "../../InputField";
+import FormError from "../../FormError";
 
-import * as React from "react";
-import InputField from "./InputField";
-import has = Reflect.has;
-import FormError from "./FormError";
-
-export default class ForgotPasswordTab extends React.Component<IForgotPasswordTabProps, IForgotPasswordTabState> {
-
+export default class ForgotPasswordPage extends React.Component<IForgotPasswordPageProps, any> {
     public state: IForgotPasswordTabState;
 
     constructor(props: IForgotPasswordTabProps) {
@@ -44,82 +41,82 @@ export default class ForgotPasswordTab extends React.Component<IForgotPasswordTa
 
     public render() {
         return (
-            <div id="as-tab-forgot-password" className="tab-pane fade">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <div className={this.state.formState.forgotPassword}>
-                            {this.state.hasError && this.state.helpMsg !== '' ?
-                                <FormError msg={this.state.helpMsg}/> : ''}
-                            <form role="form" method="post" className="as-forgot-password-form"
-                                  onSubmit={(event) => this.handleForgotPasswordSubmit(event)}>
-                                <InputField faIcon="user" type="text" placeholder="Username or Email Address"
-                                            state={this.state.usernameState}
-                                            onChange={(event:any) => this.handleUsernameChange(event)}/>
-                                <div className="form-group">
-                                    <button type="submit" className="btn btn-block as-btn-submit">Reset Password
-                                    </button>
-                                </div>
-                                <div className="form-group">
-                                    <div className="row">
-                                        <div className="col-xs-12">
-                                            <a data-toggle="tab" href="#as-tab-sign-in">Sign In</a>
-                                            <i className="fa fa-circle as-separator"/>
-                                            <a data-toggle="tab" href="#as-tab-sign-up">Sign Up</a>
+                <div>
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <div className={this.state.formState.forgotPassword}>
+                                {this.state.hasError && this.state.helpMsg !== '' ?
+                                        <FormError msg={this.state.helpMsg}/> : ''}
+                                <form role="form" method="post" className="as-forgot-password-form"
+                                      onSubmit={(event) => this.handleForgotPasswordSubmit(event)}>
+                                    <InputField faIcon="user" type="text" placeholder="Username or Email Address"
+                                                state={this.state.usernameState}
+                                                onChange={(event:any) => this.handleUsernameChange(event)}/>
+                                    <div className="form-group">
+                                        <button type="submit" className="btn btn-block as-btn-submit">Reset Password
+                                        </button>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <a href=""><IndexLink to="/">Sign In</IndexLink></a>
+                                                <i className="fa fa-circle as-separator"/>
+                                                <a href=""><Link to="/signup">Sign Up</Link></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div className={this.state.formState.verifyCode}>
-                            <form role="form" method="post" className="as-reset-password-form"
-                                  onSubmit={(event) => this.handleResetCodeSubmit(event)}>
-                                <div className="alert alert-info" role="alert">
-                                    <span className="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                    <span className="as-info">A verification code has been sent to your email. Please enter it below.</span>
-                                </div>
-                                <InputField faIcon="key" type="text" placeholder="Password reset code"
-                                            state={this.state.codeState}
-                                            onChange={(event:any) => this.handleResetCodeChange(event)}/>
-                                <InputField faIcon="lock" type="password" placeholder="New Password"
-                                            state={this.state.passwordState}
-                                            onChange={(event:any) => this.handlePasswordChange(event)}/>
-                                <InputField faIcon="lock" type="password" placeholder="Re-enter Password"
-                                            state={this.state.confirmPasswordState}
-                                            onChange={(event: any) => this.handleConfirmPasswordChange(event)}/>
-                                <div className="form-group">
-                                    <button type="submit" className="btn btn-block as-btn-submit">
-                                        Reset Password
-                                    </button>
-                                </div>
-                                <div className="form-group">
-                                    <div className="row">
-                                        <div className="col-xs-12">
-                                            <a data-toggle="tab" href="#as-tab-sign-in">Sign In</a>
-                                            <i className="fa fa-circle as-separator"/>
-                                            <a data-toggle="tab" href="#as-tab-sign-up">Sign Up</a>
+                                </form>
+                            </div>
+                            <div className={this.state.formState.verifyCode}>
+                                <form role="form" method="post" className="as-reset-password-form"
+                                      onSubmit={(event) => this.handleResetCodeSubmit(event)}>
+                                    <div className="alert alert-info" role="alert">
+                                        <span className="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        <span className="as-info">A verification code has been sent to your email. Please enter it below.</span>
+                                    </div>
+                                    <InputField faIcon="key" type="text" placeholder="Password reset code"
+                                                state={this.state.codeState}
+                                                onChange={(event:any) => this.handleResetCodeChange(event)}/>
+                                    <InputField faIcon="lock" type="password" placeholder="New Password"
+                                                state={this.state.passwordState}
+                                                onChange={(event:any) => this.handlePasswordChange(event)}/>
+                                    <InputField faIcon="lock" type="password" placeholder="Re-enter Password"
+                                                state={this.state.confirmPasswordState}
+                                                onChange={(event: any) => this.handleConfirmPasswordChange(event)}/>
+                                    <div className="form-group">
+                                        <button type="submit" className="btn btn-block as-btn-submit">
+                                            Reset Password
+                                        </button>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <a data-toggle="tab" href="#as-tab-sign-in">Sign In</a>
+                                                <i className="fa fa-circle as-separator"/>
+                                                <a data-toggle="tab" href="#as-tab-sign-up">Sign Up</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div className={this.state.formState.resetSuccess}>
-                            <div className="row">
-                                <div className="col-xs-12">
-                                    <div className="alert alert-success" role="alert">
+                                </form>
+                            </div>
+                            <div className={this.state.formState.resetSuccess}>
+                                <div className="row">
+                                    <div className="col-xs-12">
+                                        <div className="alert alert-success" role="alert">
                                                 <span className="glyphicon glyphicon-thumbs-up" aria-hidden="true">
                                                 </span>
-                                        <span className="as-success">Password updated successfully. Please
+                                            <span className="as-success">Password updated successfully. Please
                                                     <a data-toggle="tab"
                                                        onClick={(event: any) => this.handleLoginRedirect(event)}
                                                        href="#as-tab-sign-in"> click here</a> to login.
                                         </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         );
     }
 

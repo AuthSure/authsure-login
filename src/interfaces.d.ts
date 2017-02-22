@@ -3,6 +3,19 @@ interface IAppProps {
 }
 interface IAppState {
 }
+interface IAppContainerProps {
+    data: any,
+    children: any
+}
+interface ILoginPageProps{
+    data:any
+}
+interface ISignupPageProps {
+    data:any
+}
+interface IForgotPasswordPageProps {
+    data:any
+}
 interface ILoginTabProps {
     data: any
 }

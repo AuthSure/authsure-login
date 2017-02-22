@@ -9,7 +9,7 @@ module.exports = {
 		// The filename to output in disk, [name] is the chunk
 		filename: "[name].js",
 		// The path the output will be served under (used by the dev server
-		publicPath: "/lib/login/1",
+		publicPath: "/",
 		// The name of the library being published
 		library: 'AuthSure',
 		// The format to export the library
@@ -37,6 +37,7 @@ module.exports = {
 	},
 	devServer: {
 		port: 8888,
+        historyApiFallback: true,
 		watchOptions: {
 			poll: 1000
 		}
