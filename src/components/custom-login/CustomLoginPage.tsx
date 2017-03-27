@@ -1,6 +1,7 @@
 /// <reference path="../../interfaces.d.ts"/>
 
 import * as React from "react";
+import { Link, IndexLink } from 'react-router';
 import InputField from "../../InputField";
 import FormError from "../../FormError";
 import has = Reflect.has;
@@ -32,7 +33,7 @@ export default class CustomLoginPage extends React.Component<ICustomLoginProps, 
             <div className="col-xs-12">
                 {this.state.hasError && this.state.helpMsg !== '' ? <FormError msg={this.state.helpMsg} /> : ''}
                 <form role="form" method="post" className="as-sign-in-form" onSubmit={(event) => this.handleSubmit(event)}>
-                    <InputField type="text" faIcon="user" placeholder="Username or Email Address"
+                    <InputField type="text" faIcon="user" placeholder="Username"
                                 state={this.state.usernameState}
                                 onChange={(event: any) => this.handleUsernameChange(event)} />
                     <InputField type="password" faIcon="lock" placeholder="Password"
@@ -40,6 +41,13 @@ export default class CustomLoginPage extends React.Component<ICustomLoginProps, 
                                 onChange={(event: any) => this.handlePasswordChange(event)} />
                     <div className="form-group">
                         <button type="submit" className="btn btn-block as-btn-submit">Sign In</button>
+                    </div>
+                    <div className="form-group">
+                        <div className="row">
+                            <div className="col-xs-12">
+                                <a href=""><Link to="/">Back</Link></a>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -68,7 +76,7 @@ export default class CustomLoginPage extends React.Component<ICustomLoginProps, 
         let username = this.state.username;
         if (username == null || username.trim() === '') {
             this.state.usernameState.hasError = true;
-            this.state.usernameState.helpMsg = 'Please enter a username or email address';
+            this.state.usernameState.helpMsg = 'Please enter a username';
             this.state.hasError = true;
         }
 
