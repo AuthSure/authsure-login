@@ -1,4 +1,4 @@
-let AuthSure = require('./Login.tsx');
+var AuthSure = require('./Login.tsx');
 module.exports = AuthSure;
 
 // require('./index.html');
