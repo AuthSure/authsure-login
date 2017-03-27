@@ -1,7 +1,6 @@
 /// <reference path="../../interfaces.d.ts"/>
 
 import * as React from "react";
-import { Link, IndexLink } from 'react-router';
 import InputField from "../../InputField";
 import FormError from "../../FormError";
 import has = Reflect.has;
@@ -94,6 +93,17 @@ export default class CustomLoginPage extends React.Component<ICustomLoginProps, 
         return !this.state.hasError;
     }
 
+    private getLoginUrl() {
+        let providers = this.props.data.providers;
+        for (let i = 0; i < providers.length; i++) {
+            let provider = providers[i];
+            if (provider.type.toLowerCase() == 'simple_api') {
+                return provider.loginUrl;
+            }
+        }
+        return null;
+    }
+
     public handleSubmit(event: any) {
         event.preventDefault();
         // Reset form
@@ -112,7 +122,7 @@ export default class CustomLoginPage extends React.Component<ICustomLoginProps, 
             };
             let self = this;
             $.ajax({
-                url: this.props.data.loginUrl + (this.props.data.loginUrl.endsWith('/') ? '' : '/') + "auth",
+                url: this.getLoginUrl(),
                 method: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(formData)
