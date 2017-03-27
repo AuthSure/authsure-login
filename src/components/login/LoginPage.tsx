@@ -1,6 +1,7 @@
 import * as React from "react";
 import LocalLogin from "../../LocalLogin";
 import ProviderLogins from "../../ProviderLogins";
+import CustomLoginPage from "../custom-login/CustomLoginPage";
 
 
 export default class LoginPage extends React.Component<ILoginPageProps, ILoginTabState> {
@@ -21,15 +22,27 @@ export default class LoginPage extends React.Component<ILoginPageProps, ILoginTa
         return hasLocal;
     }
 
+    private hasOnlyCustomLogin() {
+        let providers = this.props.data.providers;
+        return providers.length == 1
+            && providers[0].type.toLowerCase() === 'simple_api';
+    }
+
     render() {
-        return (
+        if (this.hasOnlyCustomLogin()) {
+            return (
+                <CustomLoginPage data={this.props.data}/>
+            )
+        } else {
+            return (
                 <div>
                     <div className="row">
-                        {this.hasLocalLogin() ? <LocalLogin data={this.props.data} /> : ''}
-                        <ProviderLogins providers={this.props.data.providers} signIn={true} />
+                        {this.hasLocalLogin() ? <LocalLogin data={this.props.data}/> : ''}
+                        <ProviderLogins providers={this.props.data.providers} signIn={true}/>
                     </div>
                 </div>
-        )
+            )
+        }
     }
 }
 
