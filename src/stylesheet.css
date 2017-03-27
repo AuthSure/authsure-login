@@ -32,11 +32,11 @@
 	margin-right: 10px;
 }
 
-.as-btn-rest {
+.as-btn-simple-api {
 	background: #687483;
 	color: white;
 }
-.as-btn-rest:hover, .as-btn-rest:active, .as-btn-rest:focus {
+.as-btn-simple-api:hover, .as-btn-simple-api:active, .as-btn-simple-api:focus {
 	background: #3D4857;
 	color: white;
 }

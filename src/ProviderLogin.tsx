@@ -2,6 +2,8 @@
 
 import * as React from "react";
 
+import { hashHistory } from 'react-router';
+
 export default class ProviderLogin extends React.Component<IProviderLoginProps, IProviderLoginState> {
     
     constructor(props: IProviderLoginProps) {
@@ -15,7 +17,7 @@ export default class ProviderLogin extends React.Component<IProviderLoginProps, 
             name = "cloud";
         } else if (name === 'azure-ad') {
             name = "windows";
-        } else if (type === 'rest') {
+        } else if (type === 'simple_api') {
             name = "user"
         }
         return 'fa-' + name;
@@ -23,8 +25,8 @@ export default class ProviderLogin extends React.Component<IProviderLoginProps, 
 
     private getButtonClass(): string {
         let type = this.props.provider.type.toLowerCase();
-        if (type === 'rest') {
-            return 'as-btn-rest'
+        if (type === 'simple_api') {
+            return 'as-btn-simple-api'
         }
         let name = this.props.provider.name.replace(" ", "-").toLowerCase();
         return 'as-btn-' + name;
@@ -46,6 +48,11 @@ export default class ProviderLogin extends React.Component<IProviderLoginProps, 
     }
 
     public handleClick(event: any) {
-        window.location.assign(this.props.provider.loginUrl);
+        let type = this.props.provider.type.toLowerCase();
+        if (type === 'simple_api') {
+            hashHistory.push('/custom_login');
+        } else {
+            window.location.assign(this.props.provider.loginUrl);
+        }
     }
 }

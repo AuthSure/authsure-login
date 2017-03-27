@@ -99,10 +99,10 @@ interface IFormErrorProps {
 }
 interface IFormErrorState {
 }
-interface IRestLoginProps {
+interface ICustomLoginProps {
     data: any
 }
-interface IRestLoginSstate {
+interface ICustomLoginState {
     hasError: boolean
     helpMsg: string
     username: string
