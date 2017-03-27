@@ -45,7 +45,7 @@ export default class CustomLoginPage extends React.Component<ICustomLoginProps, 
                     <div className="form-group">
                         <div className="row">
                             <div className="col-xs-12">
-                                <a href=""><Link to="/">Back</Link></a>
+
                             </div>
                         </div>
                     </div>
